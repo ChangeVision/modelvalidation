@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+   <extension point="com.change_vision.astah.ui.actionSets">
+      <actionSet
+            label="%action_set"
+            visible="true"
+            id="com.change_vision.astah.extension.rtc.plugin.validation.actionSet">
+         <action
+               label="%model_validation"
+               icon="icons/sample.gif"
+               class="validation.actions.ModelValidationAction"
+               tooltip="%tooltip_model_validation"
+               menubarPath="tool/"
+               id="model_validation">
+         </action>
+     </actionSet>
+   </extension>
+   	<extension point="com.change_vision.astah.ui.view">
+		<view
+			id="validation.view.ModelValidationView"
+			type="extraTab"
+			class="validation.view.ModelValidationView"
+			title="%title"
+			description="%description"/>
+	</extension>
+</plugin>
