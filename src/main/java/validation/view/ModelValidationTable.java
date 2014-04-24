@@ -53,7 +53,8 @@ import com.change_vision.jude.api.inf.view.IconDescription;
 public class ModelValidationTable extends JTable
 implements MouseListener, KeyListener, ListSelectionListener {
     private static final long serialVersionUID = 1L;
-
+    static final String NAME = "ModelValidationTable";
+    
     protected ModelValidationTableModel tableModel;
     private PopupMenuBuilder popupMenuBuilder;
     private QuickFixPopupMenuBuilder quickFixPopupMenuBuilder;
@@ -85,7 +86,7 @@ implements MouseListener, KeyListener, ListSelectionListener {
         addMouseListener(this);
         addKeyListener(this);
 
-        this.setName("modelvalidationtable");
+        this.setName(NAME);
 
         popupMenuBuilder = new PopupMenuBuilder();
         quickFixPopupMenuBuilder = new QuickFixPopupMenuBuilder();

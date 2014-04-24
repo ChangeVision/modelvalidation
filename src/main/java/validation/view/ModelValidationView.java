@@ -75,6 +75,10 @@ public class ModelValidationView extends JPanel implements IPluginExtraTabView, 
         updateButton.setBaseIcon();
     }
 
+    public boolean isValidationDone(){
+    	return updateButton.isDone();
+    }
+    
     public boolean isDetected() {
         return isDetected;
     }
@@ -171,6 +175,10 @@ public class ModelValidationView extends JPanel implements IPluginExtraTabView, 
 
         public void setUpdatingIcon() {
             setIcon(updatingIcon);
+        }
+        
+        public boolean isDone(){
+        	return modelValidationUpdater.getState().equals(StateValue.DONE);
         }
     }
 

@@ -12,7 +12,7 @@ public class ModelValidationViewTest {
     
     @Test
     public void todo() throws Exception {
-        assertTrue(true);
+        
     }
     
     public static void main(String args[]) {
