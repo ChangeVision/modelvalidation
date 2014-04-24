@@ -211,13 +211,6 @@ public class ModelValidationViewUITest {
 				int count = 0;
 
 				@Override
-				public boolean validate(INamedElement target) {
-					setResult(new ValidationError("category","test" + count, target, this));
-					count++;
-					return false;
-				}
-
-				@Override
 				public boolean isTargetModel(INamedElement target) {
 					return true;
 				}
@@ -225,6 +218,13 @@ public class ModelValidationViewUITest {
 				@Override
 				public List<QuickFix> getQuickFixes(INamedElement target) {
 					return null;
+				}
+
+				@Override
+				public boolean validateRule(INamedElement target) throws Exception {
+					setResult(new ValidationError("category","test" + count, target, this));
+					count++;
+					return false;
 				}
 			};
 

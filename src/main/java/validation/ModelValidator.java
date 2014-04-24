@@ -12,7 +12,7 @@ import validation.view.ModelValidationViewLocator;
 import com.change_vision.jude.api.inf.model.INamedElement;
 
 public class ModelValidator {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(ModelValidator.class);
 
 	public List<ValidationError> validate() {
@@ -22,23 +22,33 @@ public class ModelValidator {
 				.getValidationRuleManagers();
 
 		for (ValidationRuleManager ruleManager : ruleManagers) {
-			List<INamedElement> targetModels = ruleManager.getTargetModels();
-			List<ValidationRule> rules = ruleManager.getValidationRule();
+			List<INamedElement> targetModels;
+			List<ValidationRule> rules;
+			
+			try {
+				targetModels = ruleManager.getTargetModels();
+				rules = ruleManager.getValidationRule();
+			} catch (Exception e) {
+				logger.error("error occured in " + ruleManager.getClass().getName(), e);
+				throw new ApplicationException(e);
+			}
 			
 			for (INamedElement namedElement : targetModels) {
 				for (ValidationRule rule : rules) {
-					try{
+					try {
 						if (rule.isTargetModel(namedElement)) {
 							if (!rule.validate(namedElement)) {
 								errors.addAll(rule.getResults());
 							}
 						}
-					}catch(Exception e){
-						logger.error("error occured in " + rule.getClass().getName(),e);
+					} catch (Exception e) {
+						logger.error("error occured in " + rule.getClass().getName(), e);
 						throw new ApplicationException(e);
 					}
+
 				}
 			}
+
 		}
 
 		return errors;
