@@ -91,6 +91,10 @@ public class ModelValidationView extends JPanel implements IPluginExtraTabView, 
         return totalErrorLevel == ValidationErrorLevel.NOTICE.getLevel();
     }
 
+    public void errorClear(){
+    	modelValidationTable.clearTable();
+    }
+    
     private Container createToolBar() {
         final FlowLayout flowLayout = new FlowLayout(FlowLayout.RIGHT, 0, 0);
 

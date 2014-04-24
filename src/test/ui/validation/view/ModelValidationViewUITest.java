@@ -69,23 +69,27 @@ public class ModelValidationViewUITest {
 		if (frameFixture != null) {
 			frameFixture.cleanUp();
 		}
+		view.errorClear();
+		ModelValidationViewLocator.getInstance().clearRuleManager();
 	}
 
 	@Test
-	public void テーブルヘッダーには_説明_要素の種類_要素のパス_エラーレベルが表示されること() throws Exception {
-		tableFixture.requireColumnCount(5);
+	public void テーブルヘッダーには_カテゴリ_説明_要素の種類_要素のパス_エラーレベルが表示されること() throws Exception {
+		tableFixture.requireColumnCount(6);
 
 		TableColumnModel header = tableFixture.target.getColumnModel();
 
 		assertThat(header.getColumn(0).getHeaderValue().toString(),
-				is(Messages.getMessage("model_validation_table.description")));
+				is(Messages.getMessage("model_validation_table.category")));
 		assertThat(header.getColumn(1).getHeaderValue().toString(),
-				is(Messages.getMessage("model_validation_table.kind")));
+				is(Messages.getMessage("model_validation_table.description")));
 		assertThat(header.getColumn(2).getHeaderValue().toString(),
-				is(Messages.getMessage("model_validation_table.model")));
+				is(Messages.getMessage("model_validation_table.kind")));
 		assertThat(header.getColumn(3).getHeaderValue().toString(),
-				is(Messages.getMessage("model_validation_table.path")));
+				is(Messages.getMessage("model_validation_table.model")));
 		assertThat(header.getColumn(4).getHeaderValue().toString(),
+				is(Messages.getMessage("model_validation_table.path")));
+		assertThat(header.getColumn(5).getHeaderValue().toString(),
 				is(Messages.getMessage("model_validation_table.errorlevel")));
 	}
 
@@ -120,10 +124,10 @@ public class ModelValidationViewUITest {
 		};
 		setupTable(ruleManager);
 
-		assertThat(tableFixture.cell(TableCell.row(0).column(1)).value(),
+		assertThat(tableFixture.cell(TableCell.row(0).column(2)).value(),
 				is(Messages.getMessage("model_validation_type.block")));
-		assertThat(tableFixture.cell(TableCell.row(0).column(3)).value(), is("/com/sample"));
-		assertThat(getColumnIcon(0,3),is(isNotNull()));
+		assertThat(tableFixture.cell(TableCell.row(0).column(4)).value(), is("/com/sample"));
+		assertThat(getColumnIcon(0,4),is(isNotNull()));
 	}
 
 	@Test
@@ -154,10 +158,10 @@ public class ModelValidationViewUITest {
 		};
 		setupTable(ruleManager);
 
-		assertThat(tableFixture.cell(TableCell.row(0).column(1)).value(),
+		assertThat(tableFixture.cell(TableCell.row(0).column(2)).value(),
 				is(Messages.getMessage("model_validation_type.part")));
-		assertThat(tableFixture.cell(TableCell.row(0).column(3)).value(), is("/partA"));
-		assertThat(getColumnIcon(0,3),is(isNotNull()));
+		assertThat(tableFixture.cell(TableCell.row(0).column(4)).value(), is("/partA"));
+		assertThat(getColumnIcon(0,4),is(isNotNull()));
 	}
 
 	@Test
@@ -174,10 +178,10 @@ public class ModelValidationViewUITest {
 		};
 		setupTable(ruleManager);
 
-		assertThat(tableFixture.cell(TableCell.row(0).column(1)).value(),
+		assertThat(tableFixture.cell(TableCell.row(0).column(2)).value(),
 				is(Messages.getMessage("model_validation_type.port")));
-		assertThat(tableFixture.cell(TableCell.row(0).column(3)).value(), is("/com/sample"));
-		assertThat(getColumnIcon(0,3),is(isNotNull()));
+		assertThat(tableFixture.cell(TableCell.row(0).column(4)).value(), is("/com/sample"));
+		assertThat(getColumnIcon(0,4),is(isNotNull()));
 	}
 	
 	private Icon getColumnIcon(int row,int column){
@@ -208,7 +212,7 @@ public class ModelValidationViewUITest {
 
 				@Override
 				public boolean validate(INamedElement target) {
-					setResult(new ValidationError("test" + count, target, this));
+					setResult(new ValidationError("category","test" + count, target, this));
 					count++;
 					return false;
 				}

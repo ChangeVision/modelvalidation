@@ -1,7 +1,5 @@
 package validation;
 
-import static org.junit.Assert.assertTrue;
-
 import javax.swing.JFrame;
 
 import org.junit.Test;

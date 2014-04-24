@@ -135,11 +135,14 @@ implements MouseListener, KeyListener, ListSelectionListener {
             ValidationError error = (ValidationError) errors.get(i);
             target = error.getTarget();
 
+            String category = error.getCategory();
+            
             ModelType type = getType(target);
             String name = ModelValidationUtil.getName(target);
             String path = getPath(target);
             ValidationErrorLevel errorLevel = error.getErrorLevel();
 
+            setValueAt(category,i,getColumnIndex(TableHeader.CATEGORY.label));
             setValueAt(error, i, getColumnIndex(TableHeader.DESCRIPTION.label));
             setValueAt(type, i, getColumnIndex(TableHeader.KIND.label));
             setValueAt(name, i, getColumnIndex(TableHeader.MODEL.label));
@@ -160,7 +163,7 @@ implements MouseListener, KeyListener, ListSelectionListener {
         clearSelection();
     }
 
-    protected void clearTable() {
+    public void clearTable() {
         tableModel.setNumRows(0);
     }
     protected boolean getIsDetected() {
@@ -287,12 +290,13 @@ implements MouseListener, KeyListener, ListSelectionListener {
     private void setSorter() {
         sorter = new TableRowSorter<ModelValidationTableModel>(tableModel);
         ((DefaultRowSorter<ModelValidationTableModel, Integer>) sorter).setComparator
-        (getColumnIndex(TableHeader.ERRORLEVEL.label), new Comparator<ValidationErrorLevel>() {
-            public int compare(ValidationErrorLevel l1, ValidationErrorLevel l2) {
-                return l1.getIndex() - l2.getIndex();
+        (getColumnIndex(TableHeader.CATEGORY.label), new Comparator<String>() {
+            public int compare(String l1, String l2) {
+                return l1.compareTo(l2);
             }
         });
         List<SortKey> s = new ArrayList<SortKey>();
+        s.add(new RowSorter.SortKey(getColumnIndex(TableHeader.CATEGORY.label), SortOrder.ASCENDING));
         s.add(new RowSorter.SortKey(getColumnIndex(TableHeader.ERRORLEVEL.label), SortOrder.ASCENDING));
         s.add(new RowSorter.SortKey(getColumnIndex(TableHeader.DESCRIPTION.label), SortOrder.ASCENDING));
         s.add(new RowSorter.SortKey(getColumnIndex(TableHeader.KIND.label), SortOrder.ASCENDING));
@@ -323,11 +327,12 @@ implements MouseListener, KeyListener, ListSelectionListener {
     }
 
     enum TableHeader {
-        DESCRIPTION(Messages.getMessage("model_validation_table.description"), 0),
-        KIND(Messages.getMessage("model_validation_table.kind"), 1),
-        MODEL(Messages.getMessage("model_validation_table.model"), 2),
-        PATH(Messages.getMessage("model_validation_table.path"), 3),
-        ERRORLEVEL(Messages.getMessage("model_validation_table.errorlevel"), 4);
+    	CATEGORY(Messages.getMessage("model_validation_table.category"),0),
+        DESCRIPTION(Messages.getMessage("model_validation_table.description"), 1),
+        KIND(Messages.getMessage("model_validation_table.kind"), 2),
+        MODEL(Messages.getMessage("model_validation_table.model"), 3),
+        PATH(Messages.getMessage("model_validation_table.path"), 4),
+        ERRORLEVEL(Messages.getMessage("model_validation_table.errorlevel"), 5);
 
         String label = "";
         int index = 0;

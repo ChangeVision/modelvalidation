@@ -10,17 +10,17 @@ public class ValidationError {
     private INamedElement target;
     private ValidationRule rule;
     private List<INamedElement> relatedDiagramTargetList;
+	private String category;
 
-    public ValidationError(String message, INamedElement target, ValidationRule rule) {
+    public ValidationError(String category,String message, INamedElement target, ValidationRule rule) {
+    	this.category = category;
         this.message = message;
         this.target = target;
         this.rule = rule;
     }
 
-    public ValidationError(String message, INamedElement target, ValidationRule rule, List<INamedElement> relatedDiagramTargetList) {
-        this.message = message;
-        this.target = target;
-        this.rule = rule;
+    public ValidationError(String category,String message, INamedElement target, ValidationRule rule, List<INamedElement> relatedDiagramTargetList) {
+    	this(category,message,target,rule);
         this.relatedDiagramTargetList = relatedDiagramTargetList;
     }
 
@@ -51,5 +51,9 @@ public class ValidationError {
     public List<INamedElement> getRelatedDiagramTargetList() {
         return this.relatedDiagramTargetList;
     }
+
+	public String getCategory() {
+		return category;
+	}
 
 }

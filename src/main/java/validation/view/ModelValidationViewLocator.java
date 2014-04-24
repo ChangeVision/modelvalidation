@@ -47,5 +47,8 @@ public class ModelValidationViewLocator {
     public boolean isNoticeOnly() {
         return view.isNoticeOnly();
     }
-	
+
+    void clearRuleManager(){
+    	ruleManagers.clear();
+    }
 }
