@@ -39,6 +39,7 @@ import com.change_vision.jude.api.inf.exception.InvalidUsingException;
 import com.change_vision.jude.api.inf.model.IAttribute;
 import com.change_vision.jude.api.inf.model.IDependency;
 import com.change_vision.jude.api.inf.model.IDiagram;
+import com.change_vision.jude.api.inf.model.IInternalBlockDiagram;
 import com.change_vision.jude.api.inf.model.INamedElement;
 import com.change_vision.jude.api.inf.model.IParameter;
 import com.change_vision.jude.api.inf.model.IPseudostate;
@@ -237,6 +238,8 @@ implements MouseListener, KeyListener, ListSelectionListener {
             }
         } else if (target instanceof IDependency) {
             type = ModelType.DEPENDENCY;
+        } else if (target instanceof IInternalBlockDiagram){
+        	type = ModelType.INTERNAL_BLOCK_DIAGRAM;
         }
         return type;
     }
@@ -363,7 +366,8 @@ implements MouseListener, KeyListener, ListSelectionListener {
         JOIN(Messages.getMessage("model_validation_type.join"), IconDescription.UML_STATECHART_JOIN),
         JUNCTION(Messages.getMessage("model_validation_type.junction"), IconDescription.UML_STATECHART_JUNCTIONPOINT),
         DEPENDENCY(Messages.getMessage("model_validation_type.dependency"), IconDescription.UML_CLASS_DEPENDENCY),
-        ASSOCIATIONEND(Messages.getMessage("model_validation_type.association_end"), IconDescription.UML_CLASS_ASSOCATION);
+        ASSOCIATIONEND(Messages.getMessage("model_validation_type.association_end"), IconDescription.UML_CLASS_ASSOCATION), 
+        INTERNAL_BLOCK_DIAGRAM(Messages.getMessage("model_validation_type.ibd"), IconDescription.SYSML_INTERNALBLOCK_DIAGRAM);
 
         String label = "";
         IconDescription iconDescription;
