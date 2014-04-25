@@ -5,13 +5,26 @@
             label="%action_set"
             visible="true"
             id="com.change_vision.astah.extension.rtc.plugin.validation.actionSet">
+         <menu
+               id="model_validation"
+               label="%menu_group"
+               path="tool/model_validation">
+         </menu>
          <action
                label="%model_validation"
                icon="icons/sample.gif"
                class="validation.actions.ModelValidationAction"
                tooltip="%tooltip_model_validation"
-               menubarPath="tool/"
+               menubarPath="tool/model_validation/"
                id="model_validation">
+         </action>
+         <action
+               label="%model_validation_visibility"
+               icon="icons/sample.gif"
+               class="validation.actions.ShowHideModelValidationViewAction"
+               tooltip="%tooltip_model_validation_visibility"
+               menubarPath="tool/model_validation/"
+               id="model_validation_visibility">
          </action>
      </actionSet>
    </extension>
