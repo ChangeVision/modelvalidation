@@ -1,8 +1,6 @@
 package validation.utils;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -15,8 +13,6 @@ import validation.exceptions.ApplicationException;
 import com.change_vision.jude.api.inf.AstahAPI;
 import com.change_vision.jude.api.inf.exception.InvalidUsingException;
 import com.change_vision.jude.api.inf.model.IAttribute;
-import com.change_vision.jude.api.inf.model.IBlock;
-import com.change_vision.jude.api.inf.model.IClass;
 import com.change_vision.jude.api.inf.model.IElement;
 import com.change_vision.jude.api.inf.model.INamedElement;
 import com.change_vision.jude.api.inf.model.IOperation;
@@ -58,43 +54,11 @@ public class ModelValidationUtil {
 		projectViewManager.showInStructureTree((IElement) target);
 	}
 
-	// public static void UpdatePropertyView(INamedElement target) {
-	// IProjectViewManager projectViewManager = gerProjectViewManager();
-	// projectViewManager.showInPropertyView(target);
-	// }
-
-	// private static IDiagramViewManager getDiagramViewManager() {
-	// IDiagramViewManager diagramViewManager = null;
-	// try {
-	// ProjectAccessor projectAccessor =
-	// ProjectAccessorFactory.getProjectAccessor();
-	// IViewManager viewManager = projectAccessor.getViewManager();
-	// diagramViewManager = viewManager.getDiagramViewManager();
-	// } catch (Exception e) {
-	// logger.error(e.getMessage(), e);
-	// }
-	// return diagramViewManager;
-	// }
-
-	// private static IProjectViewManager gerProjectViewManager() {
-	// IProjectViewManager projectViewManager = null;
-	// try {
-	// ProjectAccessor projectAccessor =
-	// ProjectAccessorFactory.getProjectAccessor();
-	// IViewManager viewManager = projectAccessor.getViewManager();
-	// projectViewManager = viewManager.getProjectViewManager();
-	// } catch (Exception e) {
-	// logger.error(e.getMessage(), e);
-	// }
-	// return projectViewManager;
-	// }
 
 	public static IPresentation[] getPresentations(INamedElement target) {
 		IPresentation[] presentations = null;
 		try {
-			if (target instanceof IBlock) {
-				presentations = getAllPartsPresentationFromBlock(target);
-			} else if (target instanceof IOperation) {
+			if (target instanceof IOperation) {
 				IElement owner = target.getOwner();
 				presentations = owner.getPresentations();
 			} else {
@@ -105,32 +69,6 @@ public class ModelValidationUtil {
 		}
 
 		return presentations;
-	}
-
-	private static IPresentation[] getAllPartsPresentationFromBlock(INamedElement target) {
-		IBlock block = (IBlock) target;
-		IAttribute[] allParts = block.getParts();
-		List<INamedElement> parts = new ArrayList<INamedElement>();
-		for (INamedElement part : allParts) {
-			IAttribute iAttribute = (IAttribute) part;
-			IClass component = iAttribute.getType();
-			if (target.equals(component)) {
-				parts.add(part);
-			}
-		}
-
-		List<IPresentation> partPresentations = new ArrayList<IPresentation>();
-		for (INamedElement part : parts) {
-			try {
-				IPresentation[] presentations = part.getPresentations();
-				if (presentations.length > 0) {
-					partPresentations.add(presentations[0]);
-				}
-			} catch (InvalidUsingException e) {
-				logger.error(e.getMessage(), e);
-			}
-		}
-		return (IPresentation[]) partPresentations.toArray(new IPresentation[0]);
 	}
 
 	public static Icon getIcon(IconDescription desc) {

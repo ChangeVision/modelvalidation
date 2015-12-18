@@ -34,9 +34,6 @@ import validation.ValidationRule;
 import validation.ValidationRuleManager;
 import validation.view.ModelValidationView.UpdateButton;
 
-import com.change_vision.jude.api.inf.model.IAssociation;
-import com.change_vision.jude.api.inf.model.IAttribute;
-import com.change_vision.jude.api.inf.model.IBlock;
 import com.change_vision.jude.api.inf.model.INamedElement;
 import com.change_vision.jude.api.inf.model.IPort;
 
@@ -111,60 +108,6 @@ public class ModelValidationViewUITest {
 	}
 
 	@Test
-	public void エラー要素の_要素の種類_要素のパスが正しく表示されること_Block() throws Exception {
-		ValidationRuleManagerImpl ruleManager = new ValidationRuleManagerImpl() {
-
-			@Override
-			public void buildMockModels() {
-				IBlock block = mock(IBlock.class);
-				when(block.getName()).thenReturn("Block0");
-				when(block.getFullNamespace("/")).thenReturn("com/sample");
-				targets.add(block);
-			}
-		};
-		setupTable(ruleManager);
-
-		assertThat(tableFixture.cell(TableCell.row(0).column(2)).value(),
-				is(Messages.getMessage("model_validation_type.block")));
-		assertThat(tableFixture.cell(TableCell.row(0).column(4)).value(), is("/com/sample"));
-		assertThat(getColumnIcon(0,4),is(isNotNull()));
-	}
-
-	@Test
-	public void エラー要素の_要素の種類_要素のパスが正しく表示されること_Part() throws Exception {
-		ValidationRuleManagerImpl ruleManager = new ValidationRuleManagerImpl() {
-
-			@Override
-			public void buildMockModels() {
-				IAttribute firstEnd = mock(IAttribute.class);
-				IAttribute secondEnd = mock(IAttribute.class);
-				IBlock block = mock(IBlock.class);
-				
-				when(firstEnd.getType()).thenReturn(block);
-				when(secondEnd.isComposite()).thenReturn(true);
-				IAssociation association = mock(IAssociation.class);
-				
-				IAttribute[] attributes = new IAttribute[]{
-						firstEnd,
-						secondEnd
-				};
-				when(association.getMemberEnds()).thenReturn(attributes);
-				when(firstEnd.getAssociation()).thenReturn(association);
-				
-				when(firstEnd.getName()).thenReturn("partA");
-				when(firstEnd.getFullNamespace("/")).thenReturn("partA");
-				targets.add(firstEnd);
-			}
-		};
-		setupTable(ruleManager);
-
-		assertThat(tableFixture.cell(TableCell.row(0).column(2)).value(),
-				is(Messages.getMessage("model_validation_type.part")));
-		assertThat(tableFixture.cell(TableCell.row(0).column(4)).value(), is("/partA"));
-		assertThat(getColumnIcon(0,4),is(isNotNull()));
-	}
-
-	@Test
 	public void エラー要素の_要素の種類_要素のパスが正しく表示されること_Port() throws Exception {
 		ValidationRuleManagerImpl ruleManager = new ValidationRuleManagerImpl() {
 
@@ -222,7 +165,7 @@ public class ModelValidationViewUITest {
 
 				@Override
 				public boolean validateRule(INamedElement target) throws Exception {
-					setResult(new ValidationError("category","test" + count, target, this));
+					addResult(new ValidationError("category","test" + count, target, this));
 					count++;
 					return false;
 				}

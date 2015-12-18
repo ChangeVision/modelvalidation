@@ -5,13 +5,13 @@
         <bundle.symbolicName>com.change_vision.astah.model-validation</bundle.symbolicName>
         <bundle.namespace>validation</bundle.namespace>
         <plugin.install>true</plugin.install>
-        <astah.version>1.1</astah.version>
-        <astah.edition>sysml</astah.edition>
+        <astah.version>6.9</astah.version>
+        <astah.edition>all</astah.edition>
     </properties>
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.change_vision.astah</groupId>
     <artifactId>model-validation</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
     <name>%bundle.name</name>
     <description>%bundle.description</description>
@@ -299,20 +299,20 @@
             <artifactId>logback-classic</artifactId>
             <version>1.0.7</version>
         </dependency>
-        <dependency>
-            <groupId>com.change_vision.astah</groupId>
-            <artifactId>astah-api</artifactId>
-            <version>${astah.version}</version>
-            <scope>system</scope>
-            <systemPath>${astahPath}/astah-api.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>com.change_vision.astah</groupId>
-            <artifactId>astah-sysml</artifactId>
-            <version>${astah.version}</version>
-            <scope>system</scope>
-            <systemPath>${astahPath}/astah-sys.jar</systemPath>
-        </dependency>
+		<dependency>
+			<groupId>com.change_vision.astah</groupId>
+			<artifactId>astah-api</artifactId>
+			<version>${astah.version}</version>
+			<scope>system</scope>
+			<systemPath>${astahPath}/astah-api.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>com.change_vision.astah</groupId>
+			<artifactId>astah-pro</artifactId>
+			<version>${astah.version}</version>
+			<scope>system</scope>
+			<systemPath>${astahPath}/astah-pro.jar</systemPath>
+		</dependency>
         <dependency>
             <groupId>org.osgi</groupId>
             <artifactId>org.osgi.core</artifactId>

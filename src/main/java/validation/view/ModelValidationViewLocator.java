@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import validation.ValidationRuleManager;
+import validation.view.UmlModelType.UmlModelTypes;
 
 
 public class ModelValidationViewLocator {
@@ -11,6 +12,7 @@ public class ModelValidationViewLocator {
 	private static ModelValidationViewLocator instance = new ModelValidationViewLocator();
 	private ModelValidationView view;
 	private List<ValidationRuleManager> ruleManagers;
+	private ModelType modelType;
 	
 	private ModelValidationViewLocator(){
 		ruleManagers = new ArrayList<ValidationRuleManager>();
@@ -51,4 +53,15 @@ public class ModelValidationViewLocator {
     void clearRuleManager(){
     	ruleManagers.clear();
     }
+
+	public ModelType getModelType() {
+		if(modelType == null){
+			modelType = new UmlModelType(UmlModelTypes.CLASS);
+		}
+		return modelType;
+	}
+	
+	public void setModelType(ModelType modelType){
+		this.modelType = modelType;
+	}
 }

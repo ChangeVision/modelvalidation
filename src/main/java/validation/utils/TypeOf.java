@@ -2,7 +2,6 @@ package validation.utils;
 
 import com.change_vision.jude.api.inf.model.IAssociation;
 import com.change_vision.jude.api.inf.model.IAttribute;
-import com.change_vision.jude.api.inf.model.IBlock;
 import com.change_vision.jude.api.inf.model.IClass;
 import com.change_vision.jude.api.inf.model.IConnector;
 import com.change_vision.jude.api.inf.model.INamedElement;
@@ -28,10 +27,6 @@ public class TypeOf {
 			}
 		}
 		return false;
-	}
-
-	public static boolean isBlock(INamedElement target) {
-		return target instanceof IBlock;
 	}
 
 	public static boolean isPort(INamedElement target) {
@@ -60,5 +55,9 @@ public class TypeOf {
 
 	public static boolean isAttribute(INamedElement target) {
 		return target instanceof IAttribute;
+	}
+	
+	public static boolean isAssociation(INamedElement target) {
+		return target instanceof IAssociation;
 	}
 }

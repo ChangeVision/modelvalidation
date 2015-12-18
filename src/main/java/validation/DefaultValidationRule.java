@@ -11,11 +11,10 @@ public abstract class DefaultValidationRule implements ValidationRule {
 
     private List<ValidationError> results = new ArrayList<ValidationError>();
 
-    public void setResult(ValidationError result) {
-        results.clear();
+    public void addResult(ValidationError result) {
         results.add(result);
     }
-
+    
     @Override
     public List<ValidationError> getResults() {
         return results;
@@ -24,12 +23,17 @@ public abstract class DefaultValidationRule implements ValidationRule {
     @Override
     public boolean validate(INamedElement target) {
     	try{
+    	    clearResult();
     		return validateRule(target);
     	}catch(Exception e){
     		throw new ApplicationException(e);
     	}
     }
     
+    private void clearResult() {
+        results.clear();
+    }
+
     @Override
     public ValidationErrorLevel getErrorLevel() {
         return ValidationErrorLevel.ERROR;
@@ -45,6 +49,6 @@ public abstract class DefaultValidationRule implements ValidationRule {
     	return null;
     }
     
-    abstract public boolean validateRule(INamedElement target) throws Exception;
+    abstract protected boolean validateRule(INamedElement target) throws Exception;
     	
 }
