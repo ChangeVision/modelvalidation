@@ -87,6 +87,10 @@ public class ModelValidationView extends JPanel implements IPluginExtraTabView, 
         return hasFatalError;
     }
 
+    public boolean isTotalErrorLevelWarning() {
+    	return isNoticeOnly() || totalErrorLevel == ValidationErrorLevel.WARNING.getLevel();
+    }
+    
     public boolean isNoticeOnly() {
         return totalErrorLevel == ValidationErrorLevel.NOTICE.getLevel();
     }

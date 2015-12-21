@@ -46,6 +46,10 @@ public class ModelValidationViewLocator {
         return view.hasFatalError();
     }
     
+    public boolean isTotalErrorLevelWarning() {
+    	return view.isTotalErrorLevelWarning();
+    }
+    
     public boolean isNoticeOnly() {
         return view.isNoticeOnly();
     }
