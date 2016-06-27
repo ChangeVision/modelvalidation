@@ -52,6 +52,8 @@ public class UmlModelType implements ModelType {
         } else if (target instanceof IState) {
             if (StateMachineTypeOf.isSubmachineState(target)) {
                 type = UmlModelTypes.SUBMACHINESTATE;
+            } else if (StateMachineTypeOf.isFinalState(target)) {
+                type = UmlModelTypes.FINALSTATE;
             } else {
                 type = UmlModelTypes.STATE;
             }
@@ -73,6 +75,12 @@ public class UmlModelType implements ModelType {
                 type = UmlModelTypes.JOIN;
             } else if (pseudostate.isJunctionPseudostate()) {
                 type = UmlModelTypes.JUNCTION;
+            } else if (pseudostate.isEntryPointPseudostate()) {
+                type = UmlModelTypes.ENTRYPOINT;
+            } else if (pseudostate.isExitPointPseudostate()) {
+                type = UmlModelTypes.EXITPOINT;
+            } else if (pseudostate.isStubState()) {
+                type = UmlModelTypes.STUBSTATE;
             }
         } else if (target instanceof IDependency) {
             type = UmlModelTypes.DEPENDENCY;
@@ -105,6 +113,7 @@ public class UmlModelType implements ModelType {
 	    STATECHARTDGM(Messages.getMessage("model_validation_type.statechartdgm"), IconDescription.UML_DGM_STATECHART),
 	    STATE(Messages.getMessage("model_validation_type.state"), IconDescription.UML_STATECHART_STATE),
 	    SUBMACHINESTATE(Messages.getMessage("model_validation_type.submachinestate"),IconDescription.UML_STATECHART_SUBSTATE),
+        FINALSTATE(Messages.getMessage("model_validation_type.finalstate"), IconDescription.UML_STATECHART_FINALSTATE),
 	    INITIALSTATE(Messages.getMessage("model_validation_type.initialstate"), IconDescription.UML_STATECHART_INITIALSTATE),
 	    TRANSITION(Messages.getMessage("model_validation_type.transition"), IconDescription.UML_STATECHART_TRANSITION),
 	    SHALLOWHISTORY(Messages.getMessage("model_validation_type.shallow_history"), IconDescription.UML_STATECHART_SHALLOWHISTORY),
@@ -113,6 +122,9 @@ public class UmlModelType implements ModelType {
 	    FORK(Messages.getMessage("model_validation_type.fork"), IconDescription.UML_STATECHART_FORK),
 	    JOIN(Messages.getMessage("model_validation_type.join"), IconDescription.UML_STATECHART_JOIN),
 	    JUNCTION(Messages.getMessage("model_validation_type.junction"), IconDescription.UML_STATECHART_JUNCTIONPOINT),
+        ENTRYPOINT(Messages.getMessage("model_validation_type.entry_point"), IconDescription.UML_STATECHART_ENTRY_POINT),
+        EXITPOINT(Messages.getMessage("model_validation_type.exit_point"), IconDescription.UML_STATECHART_EXIT_POINT),
+        STUBSTATE(Messages.getMessage("model_validation_type.stubstate"), IconDescription.UML_STATECHART_SUBSTATE),
 	    DEPENDENCY(Messages.getMessage("model_validation_type.dependency"), IconDescription.UML_CLASS_DEPENDENCY),
 	    ASSOCIATION(Messages.getMessage("model_validation_type.association"), IconDescription.UML_CLASS_ASSOCATION),
 	    ASSOCIATIONEND(Messages.getMessage("model_validation_type.association_end"), IconDescription.UML_CLASS_ASSOCATION);
