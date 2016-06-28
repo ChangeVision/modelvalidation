@@ -112,7 +112,7 @@ public class UmlModelType implements ModelType {
 	    PROJECT(Messages.getMessage("model_validation_type.project"), IconDescription.PROJECT),
 	    STATECHARTDGM(Messages.getMessage("model_validation_type.statechartdgm"), IconDescription.UML_DGM_STATECHART),
 	    STATE(Messages.getMessage("model_validation_type.state"), IconDescription.UML_STATECHART_STATE),
-	    SUBMACHINESTATE(Messages.getMessage("model_validation_type.submachinestate"),IconDescription.UML_STATECHART_SUBSTATE),
+	    SUBMACHINESTATE(Messages.getMessage("model_validation_type.submachinestate"), IconDescription.UML_STATECHART_STATE),
         FINALSTATE(Messages.getMessage("model_validation_type.finalstate"), IconDescription.UML_STATECHART_FINALSTATE),
 	    INITIALSTATE(Messages.getMessage("model_validation_type.initialstate"), IconDescription.UML_STATECHART_INITIALSTATE),
 	    TRANSITION(Messages.getMessage("model_validation_type.transition"), IconDescription.UML_STATECHART_TRANSITION),
