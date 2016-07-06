@@ -228,6 +228,14 @@ implements MouseListener, KeyListener, ListSelectionListener {
                 return l1.compareTo(l2);
             }
         });
+        
+        ((DefaultRowSorter<ModelValidationTableModel, Integer>) sorter).setComparator
+        (getColumnIndex(TableHeader.ERRORLEVEL.label), new Comparator<ValidationErrorLevel>() {
+            public int compare(ValidationErrorLevel l1, ValidationErrorLevel l2) {
+                return l1.getIndex() - l2.getIndex();
+            }
+        });
+        
         List<SortKey> s = new ArrayList<SortKey>();
         s.add(new RowSorter.SortKey(getColumnIndex(TableHeader.CATEGORY.label), SortOrder.ASCENDING));
         s.add(new RowSorter.SortKey(getColumnIndex(TableHeader.ERRORLEVEL.label), SortOrder.ASCENDING));
